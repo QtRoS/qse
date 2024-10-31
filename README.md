@@ -59,4 +59,6 @@ qse() {
 
 ## Installation
 
-Simply add recipe to your ~/.shrc or ~/.zshrc and restart the shell
+Install [bat]([https://github.com/QtRoS/qse](https://github.com/sharkdp/bat?tab=readme-ov-file#installation), [fzf](https://github.com/junegunn/fzf?tab=readme-ov-file#installation), [ripgrep](https://github.com/BurntSushi/ripgrep?tab=readme-ov-file#installation)
+
+Then simply add recipe to your ~/.shrc or ~/.zshrc and restart the shell
