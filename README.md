@@ -30,7 +30,7 @@ qse() {
 				--bind "f4:execute(code {})" \
 				--preview-window="70%:wrap"
 	)" &&
-	echo "$file"
+        RESULT="$(pwd)/${file}" && echo "${RESULT}" | xclip -selection clipboard && echo "${RESULT}"
 }
 ```
 
@@ -53,7 +53,7 @@ qsb() {
 			--bind "f4:execute(code {})" \
 			--preview-window="70%:wrap"
 	)" &&
-	echo "$file"
+        RESULT="$(pwd)/${file}" && echo "${RESULT}" | xclip -selection clipboard && echo "${RESULT}"
 }
 ```
 
