@@ -30,7 +30,7 @@ qse() {
 				--bind "f4:execute(code {})" \
 				--preview-window="70%:wrap"
 	)" &&
-	echo "$file"
+        RESULT="$(pwd)/${file}" && echo "${RESULT}" | xclip -selection clipboard && echo "${RESULT}"
 }
 ```
 
@@ -46,14 +46,14 @@ qsb() {
 	file="$(
 		FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
 			fzf \
-			--preview="if [[ -n {} ]]; then if [[ -n {q} ]]; then ~/bin/bat-extras/src/batgrep.sh --color=always --terminal-width=105 --context=3 {q} {}; else bat --color=always {}; fi; fi" \
+			--preview="if [[ -n {} ]]; then if [[ -n {q} ]]; then /usr/bin/batgrep --color=always --terminal-width=105 --context=3 {q} {}; else bat --color=always {}; fi; fi" \
 			--disabled --query "$1" \
 			--bind "change:reload:sleep 0.1; $RG_PREFIX {q}" \
 			--bind "f3:execute(bat --paging=always --pager=\"less -j4 -R -F +/{q}\" --color=always {} < /dev/tty > /dev/tty)" \
 			--bind "f4:execute(code {})" \
 			--preview-window="70%:wrap"
 	)" &&
-	echo "$file"
+        RESULT="$(pwd)/${file}" && echo "${RESULT}" | xclip -selection clipboard && echo "${RESULT}"
 }
 ```
 
