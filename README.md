@@ -34,6 +34,8 @@ qse() {
 }
 ```
 
+[![asciicast](https://asciinema.org/a/58vlWprEPj86mINIJiPz3TbGZ.svg)](https://asciinema.org/a/58vlWprEPj86mINIJiPz3TbGZ)
+
 ## Advanced
 
 Advanced version with `bat`-preview (and awesome [batgrep](https://github.com/eth-p/bat-extras/blob/master/doc/batgrep.md))
@@ -56,6 +58,8 @@ qsb() {
 	echo "$file"
 }
 ```
+
+[![asciicast](https://asciinema.org/a/el1LE0Luqhc0ZcTmqcXt9jf0S.svg)](https://asciinema.org/a/el1LE0Luqhc0ZcTmqcXt9jf0S)
 
 ## Installation
 
