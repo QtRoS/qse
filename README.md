@@ -51,7 +51,7 @@ qsb() {
 			--preview="if [[ -n {} ]]; then if [[ -n {q} ]]; then ~/bin/bat-extras/src/batgrep.sh --color=always --terminal-width=\$FZF_PREVIEW_COLUMNS --context=3 {q} {}; else bat --color=always {}; fi; fi" \
 			--disabled --query "$1" \
 			--bind "change:reload:sleep 0.1; $RG_PREFIX {q}" \
-			--bind "f3:execute(bat --paging=always --pager=\"less -j4 -R -F +/{q}\" --color=always {} < /dev/tty > /dev/tty)" \
+			--bind "f3:execute(bat --paging=always --pager=\"less -j4 -R +/{q}\" --color=always {} < /dev/tty > /dev/tty)" \
 			--bind "f4:execute(code {})" \
 			--preview-window="70%:wrap"
 	)" &&
