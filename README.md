@@ -83,6 +83,6 @@ qsh() {
 
 ## Installation
 
-Install [bat](https://github.com/sharkdp/bat?tab=readme-ov-file#installation), [fzf](https://github.com/junegunn/fzf?tab=readme-ov-file#installation), [ripgrep](https://github.com/BurntSushi/ripgrep?tab=readme-ov-file#installation) and [bat-extras from batgrep]([https://github.com/eth-p/bat-extras](https://github.com/eth-p/bat-extras?tab=readme-ov-file#installation-via-package-manager))
+Install [bat](https://github.com/sharkdp/bat?tab=readme-ov-file#installation), [fzf](https://github.com/junegunn/fzf?tab=readme-ov-file#installation), [ripgrep](https://github.com/BurntSushi/ripgrep?tab=readme-ov-file#installation) and [bat-extras from batgrep](https://github.com/eth-p/bat-extras?tab=readme-ov-file#installation-via-package-manager)
 
 Then simply add recipe to your ~/.shrc or ~/.zshrc and restart the shell
