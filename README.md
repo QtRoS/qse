@@ -38,7 +38,7 @@ qse() {
 
 ## Advanced
 
-Advanced version with `bat`-preview (and awesome [bat-extras from batgrep](https://github.com/eth-p/bat-extras))
+Advanced version with `bat`-preview (and awesome [batgrep from bat-extras](https://github.com/eth-p/bat-extras))
 
 ```bash
 export BAT_THEME="Monokai Extended"
@@ -83,6 +83,10 @@ qsh() {
 
 ## Installation
 
-Install [bat](https://github.com/sharkdp/bat?tab=readme-ov-file#installation), [fzf](https://github.com/junegunn/fzf?tab=readme-ov-file#installation), [ripgrep](https://github.com/BurntSushi/ripgrep?tab=readme-ov-file#installation) and [bat-extras from batgrep](https://github.com/eth-p/bat-extras?tab=readme-ov-file#installation-via-package-manager)
+Install [bat](https://github.com/sharkdp/bat?tab=readme-ov-file#installation), [fzf](https://github.com/junegunn/fzf?tab=readme-ov-file#installation), [ripgrep](https://github.com/BurntSushi/ripgrep?tab=readme-ov-file#installation) and [batgrep/bat-extras](https://github.com/eth-p/bat-extras?tab=readme-ov-file#installation-via-package-manager), for example:
+
+```bash
+brew install ripgrep fzf bat bat-extras
+```
 
 Then simply add recipe to your ~/.shrc or ~/.zshrc and restart the shell
