@@ -38,7 +38,7 @@ qse() {
 
 ## Advanced
 
-Advanced version with `bat`-preview (and awesome [batgrep](https://github.com/eth-p/bat-extras/blob/master/doc/batgrep.md))
+Advanced version with `bat`-preview (and awesome [bat-extras from batgrep](https://github.com/eth-p/bat-extras))
 
 ```bash
 export BAT_THEME="Monokai Extended"
@@ -48,7 +48,7 @@ qsb() {
 	file="$(
 		FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
 			fzf \
-			--preview="if [[ -n {} ]]; then if [[ -n {q} ]]; then ~/bin/bat-extras/src/batgrep.sh --color=always --terminal-width=\$FZF_PREVIEW_COLUMNS --context=3 {q} {}; else bat --color=always {}; fi; fi" \
+			--preview="if [[ -n {} ]]; then if [[ -n {q} ]]; then batgrep --color=always --terminal-width=\$FZF_PREVIEW_COLUMNS --context=3 {q} {}; else bat --color=always {}; fi; fi" \
 			--disabled --query "$1" \
 			--bind "change:reload:sleep 0.1; $RG_PREFIX {q}" \
 			--bind "f3:execute(bat --paging=always --pager=\"less -j4 -R +/{q}\" --color=always {} < /dev/tty > /dev/tty)" \
@@ -61,8 +61,28 @@ qsb() {
 
 [![asciicast](https://asciinema.org/a/el1LE0Luqhc0ZcTmqcXt9jf0S.svg)](https://asciinema.org/a/el1LE0Luqhc0ZcTmqcXt9jf0S)
 
+And one more version with hidden files included by default is also helpful:
+
+```bash
+qsh() {
+	RG_PREFIX="rg --files-with-matches --hidden --glob '!.git'"
+	local file
+	file="$(
+		FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
+			fzf \
+			--preview="if [[ -n {} ]]; then if [[ -n {q} ]]; then batgrep --color=always --terminal-width=\$FZF_PREVIEW_COLUMNS --context=3 {q} {}; else bat --color=always --terminal-width=\$FZF_PREVIEW_COLUMNS {}; fi; fi" \
+			--disabled --query "$1" \
+			--bind "change:reload:sleep 0.1; $RG_PREFIX {q}" \
+			--bind "f3:execute(bat --paging=always --pager=\"less -j4 -R +/{q}\" --color=always {} < /dev/tty > /dev/tty)" \
+			--bind "f4:execute(code {})" \
+			--preview-window="70%:wrap"
+	)" &&
+	echo "$file"
+}
+```
+
 ## Installation
 
-Install [bat](https://github.com/sharkdp/bat?tab=readme-ov-file#installation), [fzf](https://github.com/junegunn/fzf?tab=readme-ov-file#installation), [ripgrep](https://github.com/BurntSushi/ripgrep?tab=readme-ov-file#installation)
+Install [bat](https://github.com/sharkdp/bat?tab=readme-ov-file#installation), [fzf](https://github.com/junegunn/fzf?tab=readme-ov-file#installation), [ripgrep](https://github.com/BurntSushi/ripgrep?tab=readme-ov-file#installation) and [bat-extras from batgrep]([https://github.com/eth-p/bat-extras](https://github.com/eth-p/bat-extras?tab=readme-ov-file#installation-via-package-manager))
 
 Then simply add recipe to your ~/.shrc or ~/.zshrc and restart the shell
