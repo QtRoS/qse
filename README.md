@@ -89,4 +89,9 @@ Install [bat](https://github.com/sharkdp/bat?tab=readme-ov-file#installation), [
 brew install ripgrep fzf bat bat-extras
 ```
 
+For debian/ubuntu:
+```bash
+sudo apt install ripgrep fzf bat bat-extras
+```
+
 Then simply add recipe to your ~/.shrc or ~/.zshrc and restart the shell
