@@ -53,7 +53,7 @@ qsb() {
 			--bind "change:reload:sleep 0.15; $RG_PREFIX {q}" \
 			--bind "f3:execute(bat --paging=always --pager=\"less -j4 -R +/{q}\" --color=always {} < /dev/tty > /dev/tty)" \
 			--bind "f4:execute(code {})" \
-			--bind "f6:change-preview-window(up:50%|hidden|)" \
+			--bind "f6:change-preview-window(hidden|up:50%|hidden|)" \
 			--preview-window="70%:wrap"
 	)" &&
 	echo "$file"
@@ -76,7 +76,7 @@ qsh() {
 			--bind "change:reload:sleep 0.15; $RG_PREFIX {q}" \
 			--bind "f3:execute(bat --paging=always --pager=\"less -j4 -R +/{q}\" --color=always {} < /dev/tty > /dev/tty)" \
 			--bind "f4:execute(code {})" \
-			--bind "f6:change-preview-window(up:50%|hidden|)" \
+			--bind "f6:change-preview-window(hidden|up:50%|hidden|)" \
 			--preview-window="70%:wrap"
 	)" &&
 	echo "$file"
