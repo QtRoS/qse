@@ -83,6 +83,32 @@ qsh() {
 }
 ```
 
+Version below goes further and allows you to search via ripgrep and **then** filter with fzf:
+
+```bash
+qsf() {
+    rm -f /tmp/rg-fzf-{r,f}
+	RG_PREFIX="rg --files-with-matches"
+    INITIAL_QUERY="${*:-}"
+    echo $INITIAL_QUERY > /tmp/rg-fzf-r
+	local file
+	file="$(
+        fzf --disabled --query "$INITIAL_QUERY" \
+        --preview="if [[ -n {} ]]; then if [[ -n \$(<'/tmp/rg-fzf-r') ]]; then ~/dev/bat-extras/src/batgrep.sh --color=always --terminal-width=\$FZF_PREVIEW_COLUMNS --context=3 \$(<'/tmp/rg-fzf-r') {}; else bat --color=always {}; fi; fi" \
+        --bind "start:reload($RG_PREFIX {q})+unbind(ctrl-r)" \
+        --bind "change:reload:sleep 0.15; echo {q} > /tmp/rg-fzf-r; $RG_PREFIX {q}" \
+        --bind "f3:execute(bat --paging=always --pager=\"less -j4 -R +/\$(<'/tmp/rg-fzf-r')\" --color=always {} < /dev/tty > /dev/tty)" \
+        --bind "f4:execute(code {})" \
+        --bind "f6:change-preview-window(hidden|up:50%|hidden|)" \
+        --prompt "ripgrep> " --header "Mode: CTRL-R ripgrep | CTRL-F fzf" \
+        --bind "ctrl-f:unbind(change,ctrl-f)+change-prompt(fzf> )+enable-search+rebind(ctrl-r)+transform-query(echo {q} > /tmp/rg-fzf-r; cat /tmp/rg-fzf-f)" \
+        --bind "ctrl-r:unbind(ctrl-r)+change-prompt(ripgrep> )+disable-search+reload($RG_PREFIX {q})+rebind(change,ctrl-f)+transform-query(echo {q} > /tmp/rg-fzf-f; cat /tmp/rg-fzf-r)" \
+        --preview-window="70%:wrap"
+	)" &&
+	echo "$file"
+}
+```
+
 ## Installation
 
 Install [bat](https://github.com/sharkdp/bat?tab=readme-ov-file#installation), [fzf](https://github.com/junegunn/fzf?tab=readme-ov-file#installation), [ripgrep](https://github.com/BurntSushi/ripgrep?tab=readme-ov-file#installation) and [batgrep/bat-extras](https://github.com/eth-p/bat-extras?tab=readme-ov-file#installation-via-package-manager), for example:
