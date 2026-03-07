@@ -48,11 +48,12 @@ qsb() {
 	file="$(
 		FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
 			fzf \
-			--preview="if [[ -n {} ]]; then if [[ -n {q} ]]; then batgrep --color=always --terminal-width=\$FZF_PREVIEW_COLUMNS --context=3 {q} {}; else bat --color=always {}; fi; fi" \
+			--preview="if [[ -n {} ]]; then if [[ -n {q} ]]; then batgrep --color=always --terminal-width=\$FZF_PREVIEW_COLUMNS --context=3 {q} {}; else bat --color=always --terminal-width=\$FZF_PREVIEW_COLUMNS {}; fi; fi" \
 			--disabled --query "$1" \
-			--bind "change:reload:sleep 0.1; $RG_PREFIX {q}" \
+			--bind "change:reload:sleep 0.15; $RG_PREFIX {q}" \
 			--bind "f3:execute(bat --paging=always --pager=\"less -j4 -R +/{q}\" --color=always {} < /dev/tty > /dev/tty)" \
 			--bind "f4:execute(code {})" \
+			--bind "ctrl-/:change-preview-window(up:50%|hidden|)" \
 			--preview-window="70%:wrap"
 	)" &&
 	echo "$file"
@@ -72,9 +73,10 @@ qsh() {
 			fzf \
 			--preview="if [[ -n {} ]]; then if [[ -n {q} ]]; then batgrep --color=always --terminal-width=\$FZF_PREVIEW_COLUMNS --context=3 {q} {}; else bat --color=always --terminal-width=\$FZF_PREVIEW_COLUMNS {}; fi; fi" \
 			--disabled --query "$1" \
-			--bind "change:reload:sleep 0.1; $RG_PREFIX {q}" \
+			--bind "change:reload:sleep 0.15; $RG_PREFIX {q}" \
 			--bind "f3:execute(bat --paging=always --pager=\"less -j4 -R +/{q}\" --color=always {} < /dev/tty > /dev/tty)" \
 			--bind "f4:execute(code {})" \
+			--bind "ctrl-/:change-preview-window(up:50%|hidden|)" \
 			--preview-window="70%:wrap"
 	)" &&
 	echo "$file"
