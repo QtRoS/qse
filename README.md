@@ -100,9 +100,10 @@ qsf() {
         --bind "f3:execute(bat --paging=always --pager=\"less -j4 -R +/\$(<'/tmp/rg-fzf-r')\" --color=always {} < /dev/tty > /dev/tty)" \
         --bind "f4:execute(code {})" \
         --bind "f6:change-preview-window(hidden|up:50%|hidden|)" \
-        --prompt "ripgrep> " --header "Mode: CTRL-R ripgrep | CTRL-F fzf" \
-        --bind "ctrl-f:unbind(change,ctrl-f)+change-prompt(fzf> )+enable-search+rebind(ctrl-r)+transform-query(echo {q} > /tmp/rg-fzf-r; cat /tmp/rg-fzf-f)" \
-        --bind "ctrl-r:unbind(ctrl-r)+change-prompt(ripgrep> )+disable-search+reload($RG_PREFIX {q})+rebind(change,ctrl-f)+transform-query(echo {q} > /tmp/rg-fzf-f; cat /tmp/rg-fzf-r)" \
+        --prompt "ripgrep> " --header "F3:View | F4:Edit | F6:Layout | F8:Mode" \
+        --bind 'f8:transform:[[ ! $FZF_PROMPT =~ ripgrep ]] &&
+            echo "rebind(change)+change-prompt(ripgrep> )+disable-search+transform-query:echo \{q} > /tmp/rg-fzf-f; cat /tmp/rg-fzf-r" ||
+            echo "unbind(change)+change-prompt(fzf> )+enable-search+transform-query:echo \{q} > /tmp/rg-fzf-r; cat /tmp/rg-fzf-f"' \
         --preview-window="70%:wrap"
 	)" &&
 	echo "$file"
