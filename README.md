@@ -73,8 +73,8 @@ qsf() {
 	local file
 	file="$(
         fzf --disabled --query "$INITIAL_QUERY" \
-        --preview="if [[ -n {} ]]; then if [[ -n \$(<'/tmp/rg-fzf-r') ]]; then ~/dev/bat-extras/src/batgrep.sh --color=always --terminal-width=\$FZF_PREVIEW_COLUMNS --context=3 \$(<'/tmp/rg-fzf-r') {}; else bat --color=always {}; fi; fi" \
-        --bind "start:reload($RG_PREFIX {q})+unbind(ctrl-r)" \
+        --preview="if [[ -n {} ]]; then if [[ -n \$(<'/tmp/rg-fzf-r') ]]; then batgrep --color=always --terminal-width=\$FZF_PREVIEW_COLUMNS --context=3 \$(<'/tmp/rg-fzf-r') {}; else bat --color=always {}; fi; fi" \
+        --bind "start:reload($RG_PREFIX {q})" \
         --bind "change:reload:sleep 0.15; echo {q} > /tmp/rg-fzf-r; $RG_PREFIX {q}" \
         --bind "f3:execute(bat --paging=always --pager=\"less -j4 -R +/\$(<'/tmp/rg-fzf-r')\" --color=always {} < /dev/tty > /dev/tty)" \
         --bind "f4:execute(code {})" \
