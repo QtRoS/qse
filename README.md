@@ -62,33 +62,12 @@ qsb() {
 
 [![asciicast](https://asciinema.org/a/el1LE0Luqhc0ZcTmqcXt9jf0S.svg)](https://asciinema.org/a/el1LE0Luqhc0ZcTmqcXt9jf0S)
 
-And one more version with hidden files included by default is also helpful:
-
-```bash
-qsh() {
-	RG_PREFIX="rg --files-with-matches --hidden --glob '!.git'"
-	local file
-	file="$(
-		FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
-			fzf \
-			--preview="if [[ -n {} ]]; then if [[ -n {q} ]]; then batgrep --color=always --terminal-width=\$FZF_PREVIEW_COLUMNS --context=3 {q} {}; else bat --color=always --terminal-width=\$FZF_PREVIEW_COLUMNS {}; fi; fi" \
-			--disabled --query "$1" \
-			--bind "change:reload:sleep 0.15; $RG_PREFIX {q}" \
-			--bind "f3:execute(bat --paging=always --pager=\"less -j4 -R +/{q}\" --color=always {} < /dev/tty > /dev/tty)" \
-			--bind "f4:execute(code {})" \
-			--bind "f6:change-preview-window(hidden|up:50%|hidden|)" \
-			--preview-window="70%:wrap"
-	)" &&
-	echo "$file"
-}
-```
-
-Version below goes further and allows you to search via ripgrep and **then** filter with fzf:
+Version below goes further and allows you to search via ripgrep and **then** filter with fzf, and also hidden files included by default:
 
 ```bash
 qsf() {
     rm -f /tmp/rg-fzf-{r,f}
-	RG_PREFIX="rg --files-with-matches"
+	RG_PREFIX="rg --files-with-matches --hidden --glob '!.git'"
     INITIAL_QUERY="${*:-}"
     echo $INITIAL_QUERY > /tmp/rg-fzf-r
 	local file
