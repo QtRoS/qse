@@ -62,6 +62,8 @@ qsb() {
 
 [![asciicast](https://asciinema.org/a/el1LE0Luqhc0ZcTmqcXt9jf0S.svg)](https://asciinema.org/a/el1LE0Luqhc0ZcTmqcXt9jf0S)
 
+## Ultimate
+
 Version below goes further and allows you to search via ripgrep and **then** filter with fzf, and also hidden files included by default:
 
 ```bash
@@ -74,9 +76,9 @@ qsf() {
 	file="$(
         fzf --disabled --query "$INITIAL_QUERY" \
         --preview="if [[ -n {} ]]; then if [[ -n \$(<'/tmp/rg-fzf-r') ]]; then batgrep --color=always --terminal-width=\$FZF_PREVIEW_COLUMNS --context=3 \$(<'/tmp/rg-fzf-r') {}; else bat --color=always {}; fi; fi" \
-        --bind "start:reload($RG_PREFIX {q})" \
+        --bind "start:reload($RG_PREFIX {q})+unbind(ctrl-r)" \
         --bind "change:reload:sleep 0.15; echo {q} > /tmp/rg-fzf-r; $RG_PREFIX {q}" \
-        --bind "f3:execute(bat --paging=always --pager=\"less -j4 -R +/\$(<'/tmp/rg-fzf-r')\" --color=always {} < /dev/tty > /dev/tty)" \
+        --bind "f3:execute(LESS=\"+/\$(<'/tmp/rg-fzf-r')\" bat --paging=always --pager=\"less -j4 -R\" --color=always {} < /dev/tty > /dev/tty)" \
         --bind "f4:execute(code {})" \
         --bind "f6:change-preview-window(hidden|up:50%|hidden|)" \
         --prompt "ripgrep> " --header "F3:View | F4:Edit | F6:Layout | F8:Mode" \
